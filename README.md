@@ -1,2 +1,2 @@
-# cOWIDplusViewer
-R Code for the cOWIDplus Viewer
+# cOWIDplus Viewer
+R Code for the English version of the cOWIDplus Viewer
