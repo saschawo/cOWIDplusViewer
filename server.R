@@ -1,5 +1,3 @@
-# To-Dos:
-
 library(shiny)
 library(data.table)
 library(dplyr)
@@ -9,7 +7,7 @@ library(DT)
 library(stringr)
 library(stringi)
 
-unigram.df <- fread("data/grams.csv")
+unigram.df <- fread("data/grams.csv") # Data is available via https://www.owid.de/plus/cowidplus2020/
 
 commad <- comma_format(big.mark = " ", decimal.mark = ",")
 
@@ -22,11 +20,11 @@ shinyServer(function(input, output, session) {
         end.date <- input$dateRange[2]
         
         if (is.na(beg.date)) beg.date <- "2020-01-01"
-        if (is.na(end.date)) end.date <- "2020-07-02"
+        if (is.na(end.date)) end.date <- "2020-07-02" # this has to be adapted whenever new data is available
         
         if (beg.date > end.date) {
             beg.date <- "2020-01-01"
-            end.date <- "2020-07-02" }
+            end.date <- "2020-07-02" } # this has to be adapted whenever new data is available
         
         # Creating date range vector
         date.range <- as.Date(as.Date(beg.date):as.Date(end.date), origin = "1970-01-01")
