@@ -20,11 +20,11 @@ shinyServer(function(input, output, session) {
         end.date <- input$dateRange[2]
         
         if (is.na(beg.date)) beg.date <- "2020-01-01"
-        if (is.na(end.date)) end.date <- "2020-07-02" # this has to be adapted whenever new data is available
+        if (is.na(end.date)) end.date <- "2020-09-10" # this has to be adapted whenever new data is available
         
         if (beg.date > end.date) {
             beg.date <- "2020-01-01"
-            end.date <- "2020-07-02" } # this has to be adapted whenever new data is available
+            end.date <- "2020-09-10" } # this has to be adapted whenever new data is available
         
         # Creating date range vector
         date.range <- as.Date(as.Date(beg.date):as.Date(end.date), origin = "1970-01-01")
@@ -113,10 +113,10 @@ shinyServer(function(input, output, session) {
                 hit.pat <- hit.pat.all[, list(freq = sum(freq), rel.freq = sum(rel.freq)), by = date]
                 #hit.pat <- aggregate(cbind(freq, rel.freq) ~ date, data = hit.pat.all, FUN = sum)
             } else { # If not, return an empty data.frame
-                hit.pat <- data.frame(date = as.character(date.range),
+                hit.pat <- data.frame(date = as.IDate(as.character(date.range)),
                                       freq = 0,
                                       rel.freq = 0)
-                hit.pat.all <- data.frame(date = as.character(date.range),
+                hit.pat.all <- data.frame(date = as.IDate(as.character(date.range)),
                                           entry = pat.i,
                                           freq = 0,
                                           rel.freq = 0)
@@ -127,7 +127,7 @@ shinyServer(function(input, output, session) {
             empty.dates <- as.character(date.range[!(date.range %in% as.Date(hit.pat$date))])
             if (length(empty.dates) > 0) { # Only do if there are any empty dates
                 hit.pat <- rbind(hit.pat,
-                                  data.frame(date = empty.dates,
+                                  data.frame(date = as.IDate(empty.dates),
                                              freq = 0,
                                              rel.freq = 0)) }
             hit.pat <- hit.pat[order(hit.pat$date),] # Order by date (because, maybe, there are empty dates at the end)

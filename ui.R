@@ -14,14 +14,14 @@ shinyUI(fluidPage(
         tabPanel("Main", fluid = T,
                  sidebarLayout(
                      sidebarPanel(
-                         textInput("searchPatterns", "Search patterns", value = "coronavirus,corona-krise",
+                         textInput("searchPatterns", "Search patterns", value = "coronavirus,donald trump",
                                    placeholder = "Enter search patterns..."),
                          h6("Separate several patterns with a comma. Lower/upper case is being ignored."),
                          radioButtons("inOrAll", label = "Type of search",
                                       choices = list("Search pattern matches word form exactly" = "all",
                                                      "Search pattern appears somewhere in word form" = "in"), selected = "all"),
-                         dateRangeInput("dateRange", "Date range", start = "2020-01-01", end = "2020-07-02", # this has to be adapted whenever new data is available
-                                        language = "en", separator = "to", min = "2020-01-01", max = "2020-07-02", # this has to be adapted whenever new data is available
+                         dateRangeInput("dateRange", "Date range", start = "2020-01-01", end = "2020-09-10", # this has to be adapted whenever new data is available
+                                        language = "en", separator = "to", min = "2020-01-01", max = "2020-09-10", # this has to be adapted whenever new data is available
                                         format = "yyyy-mm-dd"),
                          numericInput("rollWindow", "Window for rolling mean (in days)", value = 6, min = 1, max = 14),
                          h6("Window size of 1 indicates that no smoothing is being done."),
@@ -36,7 +36,7 @@ shinyUI(fluidPage(
                              div(style = "margin: 2px", downloadButton("downloadPDF", "PDF"))
                          ),
                          hr(),
-                         h6("Data as of July 2nd, 2020"), # this has to be adapted whenever new data is available
+                         h6("Data as of September 10th, 2020"), # this has to be adapted whenever new data is available
                          h6("Program area 'Lexik empirisch & digital', IDS Mannheim"),
                          h6(a("Deutsche Version", href="https://owid.shinyapps.io/cOWIDplusViewer_BigramSearch",
                               target = "_self"))
